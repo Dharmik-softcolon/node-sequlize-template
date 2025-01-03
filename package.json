@@ -1,5 +1,5 @@
 {
-    "name": "atomz-backend",
+    "name": "sequlize-backend",
     "version": "1.0.0",
     "description": "",
     "main": "src/server.js",
