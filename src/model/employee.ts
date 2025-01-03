@@ -1,12 +1,12 @@
 import { DataTypes, Model } from 'sequelize'
 
-import {Company} from './company'
 import sequelize from './index'
 
 export interface EmployeeAttributes {
-    id: number
-    firstName: string
-    lastName: string
+    id?: number
+    name: string
+    email: string
+    position: string
     companyId: number
     createdAt?: Date
     updatedAt?: Date
@@ -14,8 +14,9 @@ export interface EmployeeAttributes {
 
 export class Employee extends Model<EmployeeAttributes> implements EmployeeAttributes {
     public id!: number
-    public firstName!: string
-    public lastName!: string
+    public name!: string
+    public email!: string
+    public position!: string
     public companyId!: number
     public readonly createdAt!: Date
     public readonly updatedAt!: Date
@@ -28,11 +29,18 @@ Employee.init(
             autoIncrement: true,
             primaryKey: true
         },
-        firstName: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        lastName: {
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isEmail: true
+            }
+        },
+        position: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -40,7 +48,7 @@ Employee.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: Company,
+                model: 'companies',
                 key: 'id'
             }
         }
@@ -51,9 +59,5 @@ Employee.init(
         modelName: 'Employee'
     }
 )
-
-// Establish relationship
-Employee.belongsTo(Company, { foreignKey: 'companyId' })
-Company.hasMany(Employee, { foreignKey: 'companyId' })
 
 export default Employee

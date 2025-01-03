@@ -1,11 +1,11 @@
 import { Router as ExpressRouter } from 'express'
 
-import customerRouter from './customerRouter'
-import storeOwnerRouter from './storeOwnerRouter'
+import companyRoutes from './company.router'
+import employeeRouter from './employee.router'
 
 const Router = ExpressRouter()
 
-Router.use('/customer', customerRouter)
-Router.use('/store-owner', storeOwnerRouter)
+Router.use('/company', companyRoutes);
+Router.use('/employee', employeeRouter)
 
 export default Router
