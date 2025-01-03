@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+    backend:
+        build:
+            context: .
+            dockerfile: ./docker/development/dockerfile
+        ports:
+            - '5001:5001'
+        volumes:
+            - .:/usr/src/backend-app
+            - /usr/src/backend-app/node_modules
+        environment:
+            - DATABASE_URL=postgresql://postgres:Admin%40123@database:5432/wb-project
+        depends_on:
+            database:
+                condition: service_healthy
+
+    database:
+        image: postgres:15
+        ports:
+            - '5431:5432'
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: Admin@123
+            POSTGRES_DB: wb-project
+        volumes:
+            - db-data:/var/lib/postgresql/data
+        healthcheck:
+            test: ['CMD', 'pg_isready', '-U', 'postgres']
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+volumes:
+    db-data:

@@ -1,0 +1,27 @@
+# Use a lightweight Node.js image
+FROM node:20-alpine AS base
+
+# Set up the working directory
+WORKDIR /usr/src/backend-app
+
+# Copy package.json and yarn.lock for dependency installation
+COPY package.json yarn.lock ./
+
+# Install only production dependencies
+RUN yarn install --production --frozen-lockfile
+
+# Copy the rest of the application files
+COPY . .
+
+# Run Prisma generate
+RUN npx prisma generate
+
+# Build the TypeScript project (if applicable)
+RUN yarn build
+
+# Expose the application port
+EXPOSE 5001
+
+# Command to start the application
+CMD ["yarn", "start"]
+

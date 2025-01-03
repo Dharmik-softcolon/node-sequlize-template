@@ -1,0 +1,6 @@
+beforeEach(() => {
+    jest.clearAllMocks();
+
+    (prisma.store_owner.findUnique as jest.Mock).mockResolvedValue(null);
+    (prisma.store_owner.create as jest.Mock).mockResolvedValue(null);
+});

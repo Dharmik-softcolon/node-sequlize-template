@@ -1,0 +1,23 @@
+// .eslintignore
+build/*
+dist/*
+public/*
+**/out/*
+**/node_modules/*
+
+vite.config.js
+vite.config.ts
+
+
+
+tailwind.config.js
+postcss.config.js
+
+app/components/ui
+public/
+
+
+yarn.lock
+package-lock.json
+
+commitlint.config.js

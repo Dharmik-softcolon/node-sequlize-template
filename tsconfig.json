@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "strict": true,
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "rootDir": "./src" /* Specify the root folder within your source files. */,
+        "sourceMap": true /* Create source map files for emitted JavaScript files. */,
+        "outDir": "./dist" /* Specify an output folder for all emitted files. */,
+        "removeComments": true /* Disable emitting comments. */,
+        "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+        "alwaysStrict": true /* Ensure 'use strict' is always emitted. */,
+        "skipLibCheck": true,
+        "typeRoots": ["./node_modules/@types"]
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules", "dist"]
+}
